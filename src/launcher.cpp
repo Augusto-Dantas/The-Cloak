@@ -2,7 +2,9 @@
 // Injects dxgi_hook.dll into a target .exe using CreateRemoteThread
 // Provides a simple console UI and named-pipe log reader
 
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
+#endif
 #include <windows.h>
 #include <tlhelp32.h>
 #include <string>
@@ -42,7 +44,7 @@ static DWORD FindPID(const std::string& exeName) {
     DWORD pid = 0;
     if (Process32First(snap, &pe)) {
         do {
-            if (_stricmp(pe.szExeFile, exeName.c_str()) == 0) {
+            if (_wcsicmp(pe.szExeFile, std::wstring(exeName.begin(), exeName.end()).c_str()) == 0) {
                 pid = pe.th32ProcessID;
                 break;
             }
