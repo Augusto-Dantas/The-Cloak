@@ -148,5 +148,3 @@ IDXGIOutput3::CheckOverlaySupport(format, device, flags)  // more granular
 IDXGIOutput6::CheckHardwareCompositionSupport(flags)       // Windows 10 1803+
 ```
 
-## License
-MIT — use freely, attribution appreciated.
